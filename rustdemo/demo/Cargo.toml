@@ -6,11 +6,13 @@ edition = "2021"
 [dependencies]
 actix-web = "4.4"
 tokio = { version = "1.36", features = ["full"] }
-sqlx = { version = "0.8.2", features = [
+
+# SeaORM (现代 ORM)
+sea-orm = { version = "0.12", features = [
+    "sqlx-postgres",
     "runtime-tokio-rustls",
-    "postgres",
-    "chrono",
     "macros",
+    "with-chrono",
 ] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"

@@ -32,7 +32,8 @@ async fn main() -> std::io::Result<()> {
         App::new().app_data(web::Data::new(pool.clone())).service(
             web::scope("/api")
                 .route("/users", web::post().to(handlers::create_user))
-                .route("/users", web::get().to(handlers::get_users)),
+                .route("/users", web::get().to(handlers::get_users))
+                .route("/users/{id}", web::get().to(handlers::get_user_by_id)),
         )
     })
     .bind(format!("{}:{}", config.server_host, config.server_port))?

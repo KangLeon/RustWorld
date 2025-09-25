@@ -1,11 +1,7 @@
-use sqlx::postgres::PgPoolOptions;
-use sqlx::{Pool, Postgres};
+use sea_orm::{Database, DatabaseConnection, DbErr};
 
-pub type DbPool = Pool<Postgres>;
+pub type DbPool = DatabaseConnection;
 
-pub async fn init_db(database_url: &str) -> Result<DbPool, sqlx::Error> {
-    PgPoolOptions::new()
-        .max_connections(5)
-        .connect(database_url)
-        .await
+pub async fn init_db(database_url: &str) -> Result<DbPool, DbErr> {
+    Database::connect(database_url).await
 }
