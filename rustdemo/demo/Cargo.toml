@@ -6,10 +6,15 @@ edition = "2021"
 [dependencies]
 actix-web = "4.4"
 tokio = { version = "1.36", features = ["full"] }
-sqlx = { version = "0.8.2", features = ["runtime-tokio-rustls", "postgres", "chrono"] }
+sqlx = { version = "0.8.2", features = [
+    "runtime-tokio-rustls",
+    "postgres",
+    "chrono",
+    "macros",
+] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
-idna = "=1.0.1"  
+idna = "=1.0.1"
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 dotenv = "0.15"

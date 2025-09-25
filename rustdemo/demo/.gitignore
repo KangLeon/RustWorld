@@ -1,29 +1,28 @@
-# Rust 构建目录和产物
+# Rust
 /target/
 **/*.rs.bk
-*.pdb
+Cargo.lock
 
-# IDE 相关
-.idea/
+# Environment files
+.env
+.env.local
+.env.production
+.env.development
+
+# IDE
 .vscode/
+.idea/
 *.swp
 *.swo
 
-# 环境变量文件(建议不要把包含敏感信息的.env文件提交到git)
-.env
-.env.local
-.env.*
-
-# Cargo.lock (对于库项目通常建议忽略，对于二进制项目则建议包含)
-# Cargo.lock
-
-# 系统文件
+# OS
 .DS_Store
 Thumbs.db
 
-# 日志文件
+# Logs
 *.log
 
-# 临时文件
-*.tmp
-*.bak
+# Database
+*.db
+*.sqlite
+*.sqlite3

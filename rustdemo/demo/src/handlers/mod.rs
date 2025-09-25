@@ -6,16 +6,15 @@ pub async fn create_user(
     pool: web::Data<DbPool>,
     user: web::Json<CreateUser>,
 ) -> Result<HttpResponse, Error> {
-    let user = sqlx::query_as!(
-        User,
+    let user = sqlx::query_as::<_, User>(
         r#"
         INSERT INTO users (username, email)
         VALUES ($1, $2)
         RETURNING id, username, email, created_at
         "#,
-        user.username,
-        user.email
     )
+    .bind(&user.username)
+    .bind(&user.email)
     .fetch_one(pool.get_ref())
     .await
     .map_err(|e| {
@@ -27,7 +26,7 @@ pub async fn create_user(
 }
 
 pub async fn get_users(pool: web::Data<DbPool>) -> Result<HttpResponse, Error> {
-    let users = sqlx::query_as!(User, "SELECT id, username, email, created_at FROM users")
+    let users = sqlx::query_as::<_, User>("SELECT id, username, email, created_at FROM users")
         .fetch_all(pool.get_ref())
         .await
         .map_err(|e| {
